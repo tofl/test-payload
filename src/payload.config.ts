@@ -7,6 +7,10 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { Countries } from './collections/Countries'
+import { Languages } from './collections/Languages'
+import { Domains } from './collections/Domains'
+import { Pages } from './collections/Pages'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -17,8 +21,15 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    components: {
+      views: {
+        dashboard: {
+          Component: '/app/(payload)/admin/components/Dashboard',
+        },
+      },
+    },
   },
-  collections: [Users, Media],
+  collections: [Users, Media, Countries, Languages, Domains, Pages],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
