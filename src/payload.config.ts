@@ -26,6 +26,10 @@ export default buildConfig({
         dashboard: {
           Component: '/app/(payload)/admin/components/Dashboard',
         },
+        domainViewer: {
+          Component: '/app/(payload)/admin/components/DomainViewerPage',
+          path: '/domains/:id',
+        },
       },
     },
   },

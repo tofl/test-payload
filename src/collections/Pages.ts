@@ -11,6 +11,11 @@ export const Pages: CollectionConfig = {
       type: 'relationship',
       relationTo: 'domains',
       required: true,
+      admin: {
+        components: {
+          afterInput: ['/components/DomainAutoFill'],
+        },
+      },
     },
 
     {

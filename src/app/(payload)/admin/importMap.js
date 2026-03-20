@@ -1,4 +1,4 @@
-import { default as default_a72b6850a2f78e31bb666170b99e4502 } from '../../../app/(payload)/admin/components/DomainListViewer'
+import { default as default_47e045817f40f1a10267acf1e07624b8 } from '../../../components/DomainAutoFill'
 import { RscEntryLexicalCell as RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { RscEntryLexicalField as RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { LexicalDiffComponent as LexicalDiffComponent_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
@@ -23,10 +23,11 @@ import { UnderlineFeatureClient as UnderlineFeatureClient_e70f5e05f09f93e00b997e
 import { BoldFeatureClient as BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { ItalicFeatureClient as ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { default as default_3d629a63553b389e2b9f50ca35e34061 } from '../../../app/(payload)/admin/components/Dashboard'
+import { default as default_ecea898cda928531575b5e5477a987c1 } from '../../../app/(payload)/admin/components/DomainViewerPage'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
 export const importMap = {
-  "/app/(payload)/admin/components/DomainListViewer#default": default_a72b6850a2f78e31bb666170b99e4502,
+  "/components/DomainAutoFill#default": default_47e045817f40f1a10267acf1e07624b8,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalCell": RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalField": RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/rsc#LexicalDiffComponent": LexicalDiffComponent_44fe37237e0ebf4470c9990d8cb7b07e,
@@ -51,5 +52,6 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#BoldFeatureClient": BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#ItalicFeatureClient": ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "/app/(payload)/admin/components/Dashboard#default": default_3d629a63553b389e2b9f50ca35e34061,
+  "/app/(payload)/admin/components/DomainViewerPage#default": default_ecea898cda928531575b5e5477a987c1,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }

@@ -80,7 +80,7 @@ const Dashboard: React.FC = () => {
             <Card
               key={domain.id}
               title={domain.name}
-              href={`/admin/collections/domains/${domain.id}`}
+              href={`/admin/domains/${domain.id}`}
             />
           ))}
         </div>
