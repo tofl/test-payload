@@ -4,7 +4,15 @@ export const Domains: CollectionConfig = {
   slug: 'domains',
   admin: {
     useAsTitle: 'name',
-    preview: ({ slug }) => `http://localhost:3000/${slug}`,
+    components: {
+      views: {
+        edit: {
+          default: {
+            Component: '/app/(payload)/admin/components/DomainListViewer',
+          },
+        },
+      },
+    },
   },
   fields: [
     {
