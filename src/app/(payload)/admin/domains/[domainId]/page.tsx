@@ -2,12 +2,12 @@
 
 import React, { useEffect, useState } from 'react'
 import { Button, Card } from '@payloadcms/ui'
-import { usePathname } from 'next/navigation'
-import type { Country, Domain, Page } from '../../../../payload-types'
+import { useParams } from 'next/navigation'
+import type { Country, Domain, Page } from '@/payload-types'
 
 const DomainViewerPage: React.FC = () => {
-  const pathname = usePathname()
-  const id = pathname?.split('/').at(-1)
+  const params = useParams()
+  const domainId = params.domainId
 
   const [domain, setDomain] = useState<Domain | null>(null)
   const [pages, setPages] = useState<Page[]>([])
@@ -15,16 +15,20 @@ const DomainViewerPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    if (!id || isNaN(Number(id))) return
+    if (!domainId || isNaN(Number(domainId))) {
+      return
+    }
 
     const load = async () => {
       try {
         const [domainRes, pagesRes] = await Promise.all([
-          fetch(`/api/domains/${id}?depth=2`),
-          fetch(`/api/pages?where[domain][equals]=${id}&depth=1&limit=100`),
+          fetch(`/api/domains/${domainId}?depth=2`),
+          fetch(`/api/pages?where[domain][equals]=${domainId}&depth=1&limit=100`),
         ])
 
-        if (!domainRes.ok) throw new Error('Domain not found')
+        if (!domainRes.ok) {
+          throw new Error('Domain not found')
+        }
 
         const domainData = await domainRes.json()
         const pagesData = await pagesRes.json()
@@ -38,7 +42,7 @@ const DomainViewerPage: React.FC = () => {
     }
 
     load()
-  }, [id])
+  }, [domainId])
 
   if (loading) {
     return (
@@ -160,7 +164,7 @@ const DomainViewerPage: React.FC = () => {
         <h2 style={{ margin: 0 }}>Pages</h2>
         <Button
           el="link"
-          to={`/admin/domains/${id}/pages/create`}
+          to={`/admin/collections/pages/create?d=${domainId}`}
           buttonStyle="secondary"
         >
           Create new
@@ -190,7 +194,7 @@ const DomainViewerPage: React.FC = () => {
             <Card
               key={page.id}
               title={page.name || page.slug}
-              href={`/admin/collections/pages/${page.id}`}
+              href={`/admin/collections/pages/${page.id}?d=${domainId}`}
             />
           ))}
         </div>

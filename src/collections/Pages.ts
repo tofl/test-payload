@@ -1,19 +1,44 @@
-import { CollectionConfig } from 'payload'
+import type { CollectionConfig } from 'payload'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
   admin: {
     useAsTitle: 'name',
+    // Live preview: adjust the URL once the frontend route for pages exists
+    livePreview: {
+      url: ({ data }) => {
+        const origin = process.env.NEXT_PUBLIC_SERVER_URL ?? 'http://localhost:3000'
+        const slug = data?.slug as string | undefined
+        return slug ? `${origin}/${slug}` : origin
+      },
+    },
   },
   fields: [
     {
       name: 'domain',
       type: 'relationship',
       relationTo: 'domains',
+      hasMany: false,
       required: true,
       admin: {
         components: {
-          afterInput: ['/components/DomainAutoFill'],
+          Field: '/components/custom-fields/HiddenRelationField',
+        },
+      },
+    },
+
+    // Hidden mirror of domain.type, populated by DomainTypeField.
+    // Used by admin.condition on country and language below.
+    {
+      name: 'domainType',
+      type: 'select',
+      options: [
+        { label: 'Country', value: 'country' },
+        { label: 'Product', value: 'product' },
+      ],
+      admin: {
+        components: {
+          Field: '/components/custom-fields/DomainTypeField',
         },
       },
     },
@@ -26,20 +51,24 @@ export const Pages: CollectionConfig = {
       },
     },
 
+    // Visible only when domain.type === 'product'
     {
       name: 'country',
       type: 'relationship',
       relationTo: 'countries',
       admin: {
+        condition: (data) => data?.domainType === 'product',
         description: 'Used when the domain type is product (page represents a country)',
       },
     },
 
+    // Visible only when domain.type === 'product'
     {
       name: 'language',
       type: 'relationship',
       relationTo: 'languages',
       admin: {
+        condition: (data) => data?.domainType === 'product',
         description: 'Optional language for this page (when domain type = product)',
       },
     },
@@ -70,7 +99,6 @@ export const Pages: CollectionConfig = {
           type: 'text',
           required: true,
         },
-
         {
           name: 'resources',
           type: 'array',
@@ -80,14 +108,8 @@ export const Pages: CollectionConfig = {
               type: 'select',
               required: true,
               options: [
-                {
-                  label: 'File',
-                  value: 'file',
-                },
-                {
-                  label: 'Link',
-                  value: 'link',
-                },
+                { label: 'File', value: 'file' },
+                { label: 'Link', value: 'link' },
               ],
             },
             {
@@ -113,7 +135,6 @@ export const Pages: CollectionConfig = {
             },
           ],
         },
-
         {
           name: 'content',
           type: 'richText',

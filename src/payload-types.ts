@@ -214,6 +214,7 @@ export interface Domain {
 export interface Page {
   id: number;
   domain: number | Domain;
+  domainType?: ('country' | 'product') | null;
   /**
    * Product name when the domain type is country
    */
@@ -430,6 +431,7 @@ export interface DomainsSelect<T extends boolean = true> {
  */
 export interface PagesSelect<T extends boolean = true> {
   domain?: T;
+  domainType?: T;
   name?: T;
   country?: T;
   language?: T;
