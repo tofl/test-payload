@@ -1,31 +1,27 @@
 'use client'
 
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useField, useFormFields } from '@payloadcms/ui'
-import type { SelectFieldClientComponent } from 'payload'
+import type { TextFieldClientComponent } from 'payload'
 
-const DomainTypeField: SelectFieldClientComponent = ({ path }) => {
-  const { value, setValue, formInitializing } = useField<string>({ path })
-
-  // Reads the domain field value reactively from form state.
-  // This fires again whenever HiddenRelationField sets the domain value.
+// Hidden field that keeps domainType in sync with the selected domain.
+// Watches the `domain` relationship field, fetches the domain's type via the
+// REST API, and updates `domainType` so that CountryField / LanguageField can
+// conditionally render themselves.
+const DomainTypeField: TextFieldClientComponent = ({ path }) => {
+  const { setValue } = useField<string>({ path })
   const domainId = useFormFields(([fields]) => fields['domain']?.value as number | undefined)
 
   useEffect(() => {
-    // Same guard as HiddenRelationField: wait for Payload's async form
-    // initialization to complete before writing, to avoid being overwritten.
-    if (formInitializing) return
-
-    // Already populated (edit form) or domain not yet set
-    if (value || !domainId) return
+    if (!domainId) return
 
     fetch(`/api/domains/${domainId}?depth=0`)
-      .then((r) => r.json())
+      .then((res) => res.json())
       .then((domain) => {
         if (domain?.type) setValue(domain.type)
       })
       .catch(() => {})
-  }, [formInitializing, domainId])
+  }, [domainId])
 
   return null
 }

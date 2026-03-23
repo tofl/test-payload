@@ -1,5 +1,8 @@
 import { default as default_7d00fdc9f0d5beaf8f2b217a333ed941 } from '../../../components/custom-fields/HiddenRelationField'
 import { default as default_e9e240747935b52b25a5721ba3e28951 } from '../../../components/custom-fields/DomainTypeField'
+import { default as default_762868c50914eee29fe4fb388d1c0ad7 } from '../../../components/custom-fields/RequiredRelationLabel'
+import { default as default_54aeeddc9473b4ca4aa2312fa71f8aae } from '../../../components/custom-fields/CountryField'
+import { default as default_df292eac1e5eefced7267423864c970a } from '../../../components/custom-fields/LanguageField'
 import { RscEntryLexicalCell as RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { RscEntryLexicalField as RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { LexicalDiffComponent as LexicalDiffComponent_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
@@ -29,6 +32,9 @@ import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } f
 export const importMap = {
   "/components/custom-fields/HiddenRelationField#default": default_7d00fdc9f0d5beaf8f2b217a333ed941,
   "/components/custom-fields/DomainTypeField#default": default_e9e240747935b52b25a5721ba3e28951,
+  "/components/custom-fields/RequiredRelationLabel#default": default_762868c50914eee29fe4fb388d1c0ad7,
+  "/components/custom-fields/CountryField#default": default_54aeeddc9473b4ca4aa2312fa71f8aae,
+  "/components/custom-fields/LanguageField#default": default_df292eac1e5eefced7267423864c970a,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalCell": RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalField": RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/rsc#LexicalDiffComponent": LexicalDiffComponent_44fe37237e0ebf4470c9990d8cb7b07e,

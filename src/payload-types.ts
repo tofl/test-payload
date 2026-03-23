@@ -214,7 +214,7 @@ export interface Domain {
 export interface Page {
   id: number;
   domain: number | Domain;
-  domainType?: ('country' | 'product') | null;
+  domainType?: string | null;
   /**
    * Product name when the domain type is country
    */

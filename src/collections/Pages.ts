@@ -2,6 +2,33 @@ import type { CollectionConfig } from 'payload'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
+  /*
+    TODO For the create/edit page
+    Programmatically hide the "name" field
+    Make the first letter of "country" and "language" uppercase
+    Solve bug of "are you sure you want to leave" popup displaying even after the page is saved
+    => Would it be more interesting of recreating the whole "create/edit" page from scratch ?
+   */
+  /*
+  hooks: {
+    beforeChange: [
+      async ({ data, req }) => {
+        const domainId = typeof data.domain === 'object' ? data.domain?.id : data.domain
+        if (domainId) {
+          const domain = await req.payload.findByID({
+            collection: 'domains',
+            id: domainId,
+            depth: 0,
+            overrideAccess: true,
+            req,
+          })
+          data.domainType = domain?.type ?? null
+        }
+        return data
+      },
+    ],
+  },
+   */
   admin: {
     useAsTitle: 'name',
     // Live preview: adjust the URL once the frontend route for pages exists
@@ -27,15 +54,9 @@ export const Pages: CollectionConfig = {
       },
     },
 
-    // Hidden mirror of domain.type, populated by DomainTypeField.
-    // Used by admin.condition on country and language below.
     {
       name: 'domainType',
-      type: 'select',
-      options: [
-        { label: 'Country', value: 'country' },
-        { label: 'Product', value: 'product' },
-      ],
+      type: 'text',
       admin: {
         components: {
           Field: '/components/custom-fields/DomainTypeField',
@@ -51,25 +72,29 @@ export const Pages: CollectionConfig = {
       },
     },
 
-    // Visible only when domain.type === 'product'
     {
       name: 'country',
       type: 'relationship',
       relationTo: 'countries',
       admin: {
-        condition: (data) => data?.domainType === 'product',
         description: 'Used when the domain type is product (page represents a country)',
+        components: {
+          Field: '/components/custom-fields/CountryField',
+          Label: '/components/custom-fields/RequiredRelationLabel',
+        },
       },
     },
 
-    // Visible only when domain.type === 'product'
     {
       name: 'language',
       type: 'relationship',
       relationTo: 'languages',
       admin: {
-        condition: (data) => data?.domainType === 'product',
         description: 'Optional language for this page (when domain type = product)',
+        components: {
+          Field: '/components/custom-fields/LanguageField',
+          Label: '/components/custom-fields/RequiredRelationLabel',
+        },
       },
     },
 
