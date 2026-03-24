@@ -14,7 +14,7 @@ export default async function DomainPage({ params }: Args) {
   const { docs: domains } = await payload.find({
     collection: 'domains',
     where: { slug: { equals: slug } },
-    limit: 1,
+    limit: 1, // TODO existe-t-il un meilleur moyen que "limit" ?
     depth: 0,
   })
 
@@ -24,16 +24,15 @@ export default async function DomainPage({ params }: Args) {
 
   const domain = domains[0]
 
+  // TODO optimize
   const { docs: pages } = await payload.find({
     collection: 'pages',
     where: { domain: { equals: domain.id } },
-    depth: 0,
+    depth: 1,
   })
 
   // Available languages
   // Perform a select on all pages related to
-
-  console.log(pages)
 
   return (
     <div className="flex min-h-screen">
@@ -53,7 +52,7 @@ export default async function DomainPage({ params }: Args) {
       <DomainForm
         domainName={domain.name ?? ''}
         domainType={domain.type}
-        pages={pages.map((p) => ({ id: p.id, name: p.name ?? null }))}
+        pages={pages}
       />
     </div>
   )

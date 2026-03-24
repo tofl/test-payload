@@ -1,11 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-
-type Page = {
-  id: number
-  name: string | null
-}
+import { Page } from '@/payload-types'
 
 type Props = {
   domainName: string
@@ -14,13 +10,22 @@ type Props = {
 }
 
 export default function DomainForm({ domainName, domainType, pages }: Props) {
-  const [selectedPage, setSelectedPage] = useState('')
+  const [selectedPage, setSelectedPage] = useState<Page | null>()
   const [language, setLanguage] = useState('')
   const [profile, setProfile] = useState('')
 
   const selectLabel = domainType === 'product' ? 'Select your country' : 'Select a product'
-  const pageSelected = selectedPage !== ''
+  const pageSelected = !!selectedPage
   const canSubmit = pageSelected && language !== '' && profile !== ''
+
+  const selectPage = (pageId: string) => {
+    const page = pages.find(p => p.id === Number(pageId))
+    setSelectedPage(page)
+    setLanguage('')
+    setProfile('')
+
+    console.log(page, pageSelected)
+  };
 
   return (
     <div className="flex w-1/2 flex-col px-16 py-12">
@@ -41,12 +46,8 @@ export default function DomainForm({ domainName, domainType, pages }: Props) {
             </label>
             <select
               id="page-select"
-              value={selectedPage}
-              onChange={(e) => {
-                setSelectedPage(e.target.value)
-                setLanguage('')
-                setProfile('')
-              }}
+              value={selectedPage?.id}
+              onChange={e => selectPage(e.target.value)}
               className="rounded border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3c217b]"
             >
               <option value="">—</option>
