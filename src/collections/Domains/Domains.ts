@@ -1,5 +1,15 @@
 import { CollectionConfig } from 'payload'
 
+/*
+  TODO ui des pages Domains
+    - Afficher tous les champs nécessaires dans l'en-tête de la page de visualisation
+    - Ajouter un fil d'Ariane
+    - Ajouter un moyen de modifier le domaine
+
+   TODO Ajouter des collections pour gérer les translations (mais voir avant quel est le moyen officiel de gérer les trads)
+    - une collection principale
+    - une collection "custom" rattachée à un domain
+ */
 export const Domains: CollectionConfig = {
   slug: 'domains',
   admin: {
@@ -27,6 +37,12 @@ export const Domains: CollectionConfig = {
       admin: {
         condition: (data) => data.type === 'country',
       },
+    },
+    {
+      name: 'hasPageSelectionForm',
+      type: 'checkbox',
+      label: 'Show page selection form',
+      defaultValue: true,
     },
     {
       name: 'slug',

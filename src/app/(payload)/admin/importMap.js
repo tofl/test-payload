@@ -1,8 +1,7 @@
-import { default as default_7d00fdc9f0d5beaf8f2b217a333ed941 } from '../../../components/custom-fields/HiddenRelationField'
-import { default as default_e9e240747935b52b25a5721ba3e28951 } from '../../../components/custom-fields/DomainTypeField'
-import { default as default_762868c50914eee29fe4fb388d1c0ad7 } from '../../../components/custom-fields/RequiredRelationLabel'
-import { default as default_54aeeddc9473b4ca4aa2312fa71f8aae } from '../../../components/custom-fields/CountryField'
-import { default as default_df292eac1e5eefced7267423864c970a } from '../../../components/custom-fields/LanguageField'
+import { default as default_07e6996715829454f4805d61fa428274 } from '../../../collections/Pages/components/DomainField'
+import { default as default_6506a279d9fa0ed15b0e0504edb34ddd } from '../../../collections/Pages/components/DomainObjectField'
+import { default as default_9abf3abc78c4314f1528193871c7a138 } from '../../../collections/Pages/components/NameField'
+import { default as default_b839db281bcdaafe57ae5cc8e52548ae } from '../../../collections/Pages/components/CountryField'
 import { RscEntryLexicalCell as RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { RscEntryLexicalField as RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { LexicalDiffComponent as LexicalDiffComponent_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
@@ -30,11 +29,10 @@ import { default as default_9a680279bc487e655cb510fd8d9dadff } from '../../../co
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
 export const importMap = {
-  "/components/custom-fields/HiddenRelationField#default": default_7d00fdc9f0d5beaf8f2b217a333ed941,
-  "/components/custom-fields/DomainTypeField#default": default_e9e240747935b52b25a5721ba3e28951,
-  "/components/custom-fields/RequiredRelationLabel#default": default_762868c50914eee29fe4fb388d1c0ad7,
-  "/components/custom-fields/CountryField#default": default_54aeeddc9473b4ca4aa2312fa71f8aae,
-  "/components/custom-fields/LanguageField#default": default_df292eac1e5eefced7267423864c970a,
+  "/collections/Pages/components/DomainField#default": default_07e6996715829454f4805d61fa428274,
+  "/collections/Pages/components/DomainObjectField#default": default_6506a279d9fa0ed15b0e0504edb34ddd,
+  "/collections/Pages/components/NameField#default": default_9abf3abc78c4314f1528193871c7a138,
+  "/collections/Pages/components/CountryField#default": default_b839db281bcdaafe57ae5cc8e52548ae,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalCell": RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalField": RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/rsc#LexicalDiffComponent": LexicalDiffComponent_44fe37237e0ebf4470c9990d8cb7b07e,

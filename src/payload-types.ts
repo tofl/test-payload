@@ -203,6 +203,7 @@ export interface Domain {
   type: 'country' | 'product';
   name: string;
   country?: (number | null) | Country;
+  hasPageSelectionForm?: boolean | null;
   slug: string;
   updatedAt: string;
   createdAt: string;
@@ -214,47 +215,49 @@ export interface Domain {
 export interface Page {
   id: number;
   domain: number | Domain;
-  domainType?: string | null;
-  /**
-   * Product name when the domain type is country
-   */
+  domainObject?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   name?: string | null;
-  /**
-   * Used when the domain type is product (page represents a country)
-   */
-  country?: (number | null) | Country;
-  /**
-   * Optional language for this page (when domain type = product)
-   */
-  language?: (number | null) | Language;
   slug: string;
-  profiles: {
-    name: string;
-    slug: string;
-    resources?:
-      | {
-          type: 'file' | 'link';
-          file?: (number | null) | Media;
-          url?: string | null;
-          label: string;
-          id?: string | null;
-        }[]
-      | null;
-    content?: {
-      root: {
-        type: string;
-        children: {
-          type: any;
+  country?: (number | null) | Country;
+  languages: {
+    language: number | Language;
+    profiles: {
+      name: string;
+      slug: string;
+      resources?:
+        | {
+            type: 'file' | 'link';
+            file?: (number | null) | Media;
+            url?: string | null;
+            label: string;
+            id?: string | null;
+          }[]
+        | null;
+      content?: {
+        root: {
+          type: string;
+          children: {
+            type: any;
+            version: number;
+            [k: string]: unknown;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
           version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
+        };
+        [k: string]: unknown;
+      } | null;
+      id?: string | null;
+    }[];
     id?: string | null;
   }[];
   updatedAt: string;
@@ -421,6 +424,7 @@ export interface DomainsSelect<T extends boolean = true> {
   type?: T;
   name?: T;
   country?: T;
+  hasPageSelectionForm?: T;
   slug?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -431,26 +435,31 @@ export interface DomainsSelect<T extends boolean = true> {
  */
 export interface PagesSelect<T extends boolean = true> {
   domain?: T;
-  domainType?: T;
+  domainObject?: T;
   name?: T;
-  country?: T;
-  language?: T;
   slug?: T;
-  profiles?:
+  country?: T;
+  languages?:
     | T
     | {
-        name?: T;
-        slug?: T;
-        resources?:
+        language?: T;
+        profiles?:
           | T
           | {
-              type?: T;
-              file?: T;
-              url?: T;
-              label?: T;
+              name?: T;
+              slug?: T;
+              resources?:
+                | T
+                | {
+                    type?: T;
+                    file?: T;
+                    url?: T;
+                    label?: T;
+                    id?: T;
+                  };
+              content?: T;
               id?: T;
             };
-        content?: T;
         id?: T;
       };
   updatedAt?: T;

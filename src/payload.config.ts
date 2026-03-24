@@ -4,13 +4,12 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
-
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
-import { Countries } from './collections/Countries'
-import { Languages } from './collections/Languages'
-import { Domains } from './collections/Domains'
-import { Pages } from './collections/Pages'
+import { Countries } from './collections/Countries/Countries'
+import { Languages } from './collections/Languages/Languages'
+import { Domains } from './collections/Domains/Domains'
+import { Pages } from './collections/Pages/Pages'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
